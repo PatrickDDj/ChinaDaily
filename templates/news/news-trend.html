@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Analysis of News Trend
+{% endblock title %}
+
+{% block content %}
+{#{{ time_list }}#}
+{#{% for daily_proportion in daily_proportion_list %}#}
+{#    <p>{{ daily_proportion.add_time}}</p>#}
+{#    <p>{{ daily_proportion.positive_score }}</p>#}
+{#    <p>{{ daily_proportion.neutral_score }}</p>#}
+{#    <p>{{ daily_proportion.negative_score }}</p>#}
+{#{% endfor %}#}
+
+    <script src="{% static 'Chart/chart.min.js' %}"></script>
+    <br>
+<h1 align="center">Analysis of News Trend</h1>
+    <br>
+<div style="width:800px;margin:0px auto">
+    <canvas id="myChart" ></canvas>
+</div>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        {#labels: ['a', 'b', 'c'],#}
+        labels:{{ time_list |safe}},
+        datasets: [
+       {
+            label: 'Positive %',
+            data: {{ positive_list }},
+            borderColor:'blue',
+            backgroundColor:'skyBlue',
+            borderWidth: 1,
+            yAxisID: 'y-axis-1',
+        },
+       {
+            label: 'Neutral %',
+            data: {{ neutral_list }},
+            borderColor:'yellow',
+            backgroundColor:'orange',
+            borderWidth: 1,
+            yAxisID: 'y-axis-2',
+        },
+            {
+            label: 'Negative %',
+            data: {{ negative_list }},
+            borderColor:'red',
+            backgroundColor:'pink',
+            borderWidth: 1,
+            yAxisID: 'y-axis-3',
+        },
+
+]
+    },
+    options:{
+        scales:{
+						yAxes: [
+						    {
+							type: 'linear',
+							display: true,
+							position: 'left',
+							id: 'y-axis-1',
+						    },
+                            {
+							type: 'linear',
+							display: true,
+							position: 'right',
+							id: 'y-axis-2',
+							gridLines: {
+								drawOnChartArea: false
+							    }
+						    },
+                            {
+							type: 'linear',
+							display: true,
+							position: 'right',
+							id: 'y-axis-3',
+							gridLines: {
+								drawOnChartArea: false
+							    }
+						    }
+                        ],
+
+        }
+    }
+});
+</script>
+
+
+{% endblock %}

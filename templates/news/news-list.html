@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    News List
+{% endblock title %}
+
+{% block content %}
+    {#    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">#}
+
+
+    <div class="container">
+        <br>
+        <div class="row">
+            {#            <div class="col-auto mr-auto">#}
+            <form class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="date" class="sr-only">date</label>
+                    <input type="date" class="form-control" id="date" placeholder="date" name="date" value="{{ date }}">
+                </div>
+                {#                <div class="form-group mx-sm-3 mb-2">#}
+                {#                    <label for="type" class="sr-only">type</label>#}
+                {#                    <input type="text" class="form-control" id="type" placeholder="type" name="type" value="{{ type }}">#}
+                {#                </div>#}
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="type" class="sr-only">type</label>
+                    <select class="form-control" id="type" name="type">
+                        <option value="{{ type }}">{{ type }}</option>
+
+                        <option value="none">none</option>
+
+                        <option value="positive">positive</option>
+                        <option value="neutral">neutral</option>
+                        <option value="negative">negative</option>
+
+                    </select>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary mb-2">Search</button>
+            </form>
+            {#            </div>#}
+        </div>
+        <br>
+
+        {#    <hr>#}
+
+        {#    {% now "Y-m-d" as date%}#}
+        {#        <a class="btn btn-primary" href="{% url 'news:news-download' %}">Download Today's News</a>#}
+        {##}
+        {#        <a class="btn btn-primary" href="{% url 'news:news-import' %}?date={{ date }}">Import Today's News</a>#}
+        {##}
+        {#        <a class="btn btn-primary" href="{% url 'news:news-trend' %}">Analysis of News Trend</a>#}
+        {#        <br>#}
+        <h2>All : {{ news_list.count }} News</h2>
+
+        <br>
+        {#        <hr>#}
+        <div class="row mt-2">
+
+            {% for news in news_list %}
+                <div class="col-4 mb-4">
+                    <div class="card h-100">
+                        <h4 class="card-header">{{ news.title|slice:'50' }}...</h4>
+                        <div class="card-body">
+                            <p class="card-text">{{ news.content|slice:'100' }}...</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="progress">
+                                <div class="progress-bar bg-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{{ news.positive }}%">{{ news.positive }}%
+                                </div>
+                                <div class="progress-bar bg-warning progress-bar-striped" role="progressbar"
+                                     aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{{ news.neutral }}%">{{ news.neutral }}%
+                                </div>
+                                <div class="progress-bar bg-danger progress-bar-striped" role="progressbar"
+                                     aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{{ news.negative }}%">{{ news.negative }}%
+                                </div>
+
+                            </div>
+                            {#                                    <a href="#" class="btn btn-primary">进入</a>#}
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+{% endblock content %}

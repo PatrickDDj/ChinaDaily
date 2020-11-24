@@ -1,0 +1,28 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+</head>
+
+<body>
+    {% include 'header.html' %}
+    {% block content %}{% endblock content %}
+    {% include 'footer.html' %}
+    <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
+
+    <script src="{% static 'layer/layer.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1-lts/dist/umd/popper.min.js"></script>
+
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datetimepicker.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap-datetimepicker.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+
+</body>
+
+</html>

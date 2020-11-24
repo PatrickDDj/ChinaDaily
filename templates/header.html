@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+{#  {% load staticfiles %}#}
+{#  <img src="{% static 'image/head.png' %}" width="250px" height="40px">#}
+    <a class="navbar-brand" href="{% url 'news:news-list' %}">Emotion&nbsp;&nbsp;&nbsp;Analysis&nbsp;&nbsp;&nbsp;of&nbsp;&nbsp;&nbsp;China&nbsp;&nbsp;&nbsp;Daily</a>
+
+    <div>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              More
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% now "Y-m-d" as date%}
+                <a class="dropdown-item" href="{% url 'news:news-download' %}">Download Today's News</a>
+
+                <a class="dropdown-item" href="{% url 'news:news-import' %}?date={{ date }}">Import Today's News</a>
+
+                <a class="dropdown-item" href="{% url 'news:news-trend' %}">Analysis of News Trend</a>
+
+                <a class="dropdown-item" href="{% url 'news:news-real-time-input' %}">Real-Time Analysis of News</a>
+            </div>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    News Real-Time Analysis Input
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="col-12">
+            <br>
+            <h4>Input the News , then Get the Emotion Analysis!</h4>
+            <br>
+
+            <form action="{% url 'news:news-real-time-result' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea type="text" class="form-control" id="news" name="news" rows="15">{{ news }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary ">Analysis</button>
+            </form>
+        </div>
+        <br>
+
+        <br>
+
+    </div>
+
+{% endblock %}
